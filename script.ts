@@ -1,36 +1,21 @@
 
-
-/*
-    let city = document.getElementById("root")!
-
-     function citySelector(city:HTMLElement) {
-        console.log(city)
-     fetch ("http://api.weatherapi.com/v1/current.json?q="+city+"&key=6885d9accf8948e6acc113000232406")
-    }
-
-    
-let myEventListener = (event:Event) => {
-    let userInput = ((event.target as HTMLInputElement).value)
-}
-    
-city.addEventListener("input", myEventListener)
-
-    citySelector(city)
-
-let inputField = document.createElement("INPUT");
-inputField.setAttribute("type", "text");
-inputField.setAttribute("value", "City");
-document.body.appendChild(inputField);
-*/
-
-let myEventListener = (event: Event) => {
+let myEventListener =  async (event: Event) => {
   let userInput = (event.target as HTMLInputElement).value
-  fetch ("http://api.weatherapi.com/v1/current.json?q="+userInput+"&key=6885d9accf8948e6acc113000232406")
+  let response = await fetch ("http://api.weatherapi.com/v1/current.json?q="+userInput+"&key=6885d9accf8948e6acc113000232406")
+let data = await response.json()
+render(data)
 }
 
 // input
+let resultHeaderElement = document.getElementById("result-header")!
 let inputElement = document.getElementById("root")!
 inputElement.addEventListener("input", myEventListener)
 
+//output
+let render = (content: any) => {
+    resultHeaderElement.innerHTML = "<h1>"+"Temperature: " + content["current"]["temp_c"] + " Celsius"
+    +"<br>"+
+    "Temperature: " + content["current"]["temp_f"] + " Fahrenheit"+"<br>" "</h1>"
+    resultHeaderElement.className = "aClassName"
 
-
+}
