@@ -15,7 +15,7 @@ inputElement.addEventListener("input", myEventListener)
 let render = (content: any) => {
     resultHeaderElement.innerHTML = "<h1>"+"Temperature: " + content["current"]["temp_c"] + " Celsius"
     +"<br>"+
-    "Temperature: " + content["current"]["temp_f"] + " Fahrenheit"+"<br>" "</h1>"
+    "Temperature: " + content["current"]["temp_f"] + " Fahrenheit"+"<br>"+"</h1>"
     resultHeaderElement.className = "aClassName"
 
 }
