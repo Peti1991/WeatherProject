@@ -18,8 +18,6 @@ let cityDatalist = document.createElement("datalist");
 cityDatalist.setAttribute('id', 'citieslist');
 document.getElementById("root")!.appendChild(cityDatalist);
 
-
-
 //fetch if input >3 
 let myEventListener = async (event: Event) => {
   let userInput = (event.target as HTMLInputElement).value;
@@ -33,6 +31,10 @@ let myEventListener = async (event: Event) => {
   )
   let data = await response.json();
   render(data);
+  //image
+  showImage(userInput).then((picture) => {
+    renderImage(picture['photos'][0]['src']["large2x"])
+  });
   }
 };
 
@@ -55,23 +57,46 @@ let render = (content: any) => {
 };
 resultHeaderElement.className = "aClassName";
 
-//cities list loading 
-let options = "";
-
-async function foo() {
-  let obj;
-  const res = await fetch("./citylist.json");
-  obj = await res.json();
-  let i = 0;
-  let cityNames: string[] = [];
-  while (obj["cities"][i] !== undefined) {
-    cityNames = [...cityNames, obj["cities"][i]["name"]];
-    options += '<option value="' + cityNames[i] + '" />';
-    i++;
-  }
-  /*console.log(cityNames);*/
-  document.getElementById("citieslist")!.innerHTML = options;
+// image
+let renderImage = (content: any) => {
+  let body = document.getElementById("root")?.parentElement;
+  body?.setAttribute("style", "background-image: url(" + content + ")");
 }
-foo();
+
+//cities list loading 
+// let options = "";
+
+// async function foo() {
+//   let obj;
+//   const res = await fetch("./citylist.json");
+//   obj = await res.json();
+//   let i = 0;
+//   let cityNames: string[] = [];
+//   while (obj["cities"][i] !== undefined) {
+//     cityNames = [...cityNames, obj["cities"][i]["name"]];
+//     options += '<option value="' + cityNames[i] + '" />';
+//     i++;
+//   }
+//   /*console.log(cityNames);*/
+//   document.getElementById("citieslist")!.innerHTML = options;
+// }
+// foo();
 
 /* cities end */
+
+
+// image
+async function showImage(city: string) {
+  let url = "https://api.pexels.com/v1/search?per_page=1&query=" + city
+  
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "Authorization": "29BsL09NdOPDyrFlPK5f41obNPfklBfdJ735pT8aiKCUsZEwAKP5K2j5",
+      
+    },
+  });
+
+  return response.json(); 
+}
+
