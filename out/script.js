@@ -28,7 +28,7 @@ document.getElementById("root").appendChild(cityDatalist);
 let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () {
     let userInput = event.target.value;
     if (userInput.length > 3) {
-        let response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=b8fd0881b87ef2f2311bfc0636d5cba4"
+        let response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=b8fd0881b87ef2f2311bfc0636d5cba4&units=metric"
         /*"http://api.weatherapi.com/v1/current.json?q=" +
           userInput +
           "&key=6885d9accf8948e6acc113000232406"*/
