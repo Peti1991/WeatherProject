@@ -5,7 +5,7 @@ inputField.setAttribute('type', 'text');
 inputField.setAttribute('id', 'inputField');
 inputField.setAttribute('list', 'citieslist');
 inputField.setAttribute('value', '');
-inputField.className = "css-class-name"; 
+inputField.className = "css-class-name"; //modify looks
 document.getElementById("root")!.appendChild(inputField );
 
 //create p into div for output
