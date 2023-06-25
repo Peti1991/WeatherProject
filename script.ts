@@ -25,6 +25,8 @@ let myEventListener = async (event: Event) => {
   let userInput = (event.target as HTMLInputElement).value;
   if (userInput.length>3) {
   let response = await fetch(
+  /*"https://api.openweathermap.org/data/2.5/weather?q="+userInput+"&appid=b8fd0881b87ef2f2311bfc0636d5cba4"*/
+
     "http://api.weatherapi.com/v1/current.json?q=" +
       userInput +
       "&key=6885d9accf8948e6acc113000232406"
