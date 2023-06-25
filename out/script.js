@@ -28,11 +28,11 @@ document.getElementById("root").appendChild(cityDatalist);
 let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () {
     let userInput = event.target.value;
     if (userInput.length > 3) {
-        let response = yield fetch(
-        /*"https://api.openweathermap.org/data/2.5/weather?q="+userInput+"&appid=b8fd0881b87ef2f2311bfc0636d5cba4"*/
-        "http://api.weatherapi.com/v1/current.json?q=" +
-            userInput +
-            "&key=6885d9accf8948e6acc113000232406");
+        let response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=b8fd0881b87ef2f2311bfc0636d5cba4"
+        /*"http://api.weatherapi.com/v1/current.json?q=" +
+          userInput +
+          "&key=6885d9accf8948e6acc113000232406"*/
+        );
         let data = yield response.json();
         render(data);
     }
@@ -45,10 +45,10 @@ inputElement.addEventListener("input", myEventListener);
 let render = (content) => {
     resultHeaderElement.innerHTML =
         "<h1>" +
-            content["location"]["name"] +
+            content["name"] +
             "<br>" +
             "Temperature: " +
-            content["current"]["temp_c"] +
+            content["main"]["temp"] +
             " Celsius" +
             "<br>" +
             "</h1>";
