@@ -1,5 +1,5 @@
 .aClassName {
-    color:blue
+    color:white
 }
 
 body{
@@ -13,3 +13,26 @@ body{
     background-size: cover;
     
 }
+
+div {
+    padding: 2em;
+    background-color: black;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    opacity: 0.5;
+}
+
+#root input {
+    justify-content: center;
+    background-color: grey;
+    color: white;
+    border-radius: 1em;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+
+::placeholder {
+    color: white;
+}
+

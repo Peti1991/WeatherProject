@@ -12,6 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 let inputField = document.createElement("input");
 inputField.setAttribute('type', 'text');
 inputField.setAttribute('id', 'inputField');
+inputField.setAttribute('placeholder', 'Search');
 inputField.setAttribute('list', 'citieslist');
 inputField.setAttribute('value', '');
 inputField.className = "css-class-name"; //modify looks
@@ -35,6 +36,10 @@ let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () 
         );
         let data = yield response.json();
         render(data);
+        //image
+        showImage(userInput).then((picture) => {
+            renderImage(picture['photos'][0]['src']["large2x"]);
+        });
     }
 });
 // input
@@ -45,16 +50,25 @@ inputElement.addEventListener("input", myEventListener);
 let render = (content) => {
     resultHeaderElement.innerHTML =
         "<h1>" +
-            content["name"] +
+            "Weather in " + content["name"] +
             "<br>" +
-            "Temperature: " +
-            content["main"]["temp"] +
-            " Celsius" +
+            content["main"]["temp"] + " &deg;C" +
             "<br>" +
+            "humidity: " + content["main"]["humidity"] + " %" +
+            "<br>" +
+            content["weather"][0]["description"] +
+            "<br>" +
+            "wind: " + content["wind"]["speed"] + " km/h" +
             "</h1>";
 };
 resultHeaderElement.className = "aClassName";
-//cities list loading 
+// image
+let renderImage = (content) => {
+    var _a;
+    let body = (_a = document.getElementById("root")) === null || _a === void 0 ? void 0 : _a.parentElement;
+    body === null || body === void 0 ? void 0 : body.setAttribute("style", "background-image: url(" + content + ")");
+};
+// cities list loading 
 let options = "";
 function foo() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -74,3 +88,16 @@ function foo() {
 }
 foo();
 /* cities end */
+// image
+function showImage(city) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let url = "https://api.pexels.com/v1/search?per_page=1&query=" + city;
+        const response = yield fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": "29BsL09NdOPDyrFlPK5f41obNPfklBfdJ735pT8aiKCUsZEwAKP5K2j5",
+            },
+        });
+        return response.json();
+    });
+}

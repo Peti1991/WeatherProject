@@ -3,6 +3,7 @@
 let inputField = document.createElement("input");
 inputField.setAttribute('type', 'text');
 inputField.setAttribute('id', 'inputField');
+inputField.setAttribute('placeholder', 'Search');
 inputField.setAttribute('list', 'citieslist');
 inputField.setAttribute('value', '');
 inputField.className = "css-class-name"; //modify looks
@@ -47,12 +48,15 @@ inputElement.addEventListener("input", myEventListener);
 let render = (content: any) => {
   resultHeaderElement.innerHTML =
     "<h1>" +
-    content["name"] +
+    "Weather in " + content["name"] +
     "<br>" +
-    "Temperature: " +
-    content["main"]["temp"] +
-    " Celsius" +
+    content["main"]["temp"] + " &deg;C" +
     "<br>" +
+    "humidity: " + content["main"]["humidity"] + " %" +
+    "<br>" +
+    content["weather"][0]["description"] +
+    "<br>" +
+    "wind: " + content["wind"]["speed"] + " km/h" +
     "</h1>";
 };
 resultHeaderElement.className = "aClassName";
@@ -63,24 +67,24 @@ let renderImage = (content: any) => {
   body?.setAttribute("style", "background-image: url(" + content + ")");
 }
 
-//cities list loading 
-// let options = "";
+// cities list loading 
+ let options = "";
 
-// async function foo() {
-//   let obj;
-//   const res = await fetch("./citylist.json");
-//   obj = await res.json();
-//   let i = 0;
-//   let cityNames: string[] = [];
-//   while (obj["cities"][i] !== undefined) {
-//     cityNames = [...cityNames, obj["cities"][i]["name"]];
-//     options += '<option value="' + cityNames[i] + '" />';
-//     i++;
-//   }
-//   /*console.log(cityNames);*/
-//   document.getElementById("citieslist")!.innerHTML = options;
-// }
-// foo();
+ async function foo() {
+   let obj;
+   const res = await fetch("./citylist.json");
+   obj = await res.json();
+   let i = 0;
+   let cityNames: string[] = [];
+   while (obj["cities"][i] !== undefined) {
+     cityNames = [...cityNames, obj["cities"][i]["name"]];
+     options += '<option value="' + cityNames[i] + '" />';
+     i++;
+   }
+   /*console.log(cityNames);*/
+   document.getElementById("citieslist")!.innerHTML = options;
+ }
+ foo();
 
 /* cities end */
 
