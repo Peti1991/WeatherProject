@@ -1,5 +1,9 @@
 
 // create input into div
+let container =document.createElement("div")
+container.setAttribute('id','container')
+document.getElementById("root")!.appendChild(container);
+
 let inputField = document.createElement("input");
 inputField.setAttribute('type', 'text');
 inputField.setAttribute('id', 'inputField');
@@ -7,7 +11,15 @@ inputField.setAttribute('placeholder', 'Search');
 inputField.setAttribute('list', 'citieslist');
 inputField.setAttribute('value', '');
 inputField.className = "css-class-name"; //modify looks
-document.getElementById("root")!.appendChild(inputField );
+document.getElementById("container")!.appendChild(inputField );
+
+//button
+let btn = document.createElement("button");
+btn.setAttribute('id', 'button')
+document.getElementById("container")!.appendChild(btn);
+btn.innerHTML = "*";
+
+
 
 //create p into div for output
 let textField = document.createElement("p");
@@ -104,3 +116,11 @@ async function showImage(city: string) {
   return response.json(); 
 }
 
+
+
+/* //favorite list
+let [likedCities, setLikedCities] = ([]);
+let addFavorite = (likedCity) => {
+  setLikedCities((prevlikedCities) => [...prevlikedCities, likedCity]);
+};
+ */
