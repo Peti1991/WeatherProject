@@ -41,29 +41,33 @@ spinner.setAttribute('style', 'display') ;
 
 //fetch if input >3 
 let myEventListener = async (event: Event) => {
-  spinner.setAttribute('style', 'display');
   let userInput = (event.target as HTMLInputElement).value;
   if (userInput.length>3) {
-  let response = await fetch(
-    "https://api.openweathermap.org/data/2.5/weather?q="+userInput+"&appid=b8fd0881b87ef2f2311bfc0636d5cba4&units=metric"
-
-    /*"http://api.weatherapi.com/v1/current.json?q=" +
+    let response = await fetch(
+      "https://api.openweathermap.org/data/2.5/weather?q="+userInput+"&appid=b8fd0881b87ef2f2311bfc0636d5cba4&units=metric"
+      
+      /*"http://api.weatherapi.com/v1/current.json?q=" +
       userInput +
       "&key=6885d9accf8948e6acc113000232406"*/
-  )
- 
-  let data = await response.json();
-  render(data);
-  
-  //image
-  showImage(userInput).then((picture) => {
-    if (picture['photos'].length === 0) {
+      )
+      let data = await response.json();
+      render(data);
+      
+      if (!data) {
+        spinner.setAttribute('style', 'display:none');
+      } else {
+        spinner.setAttribute('style', 'display') ;
+      }
+    //image
+    showImage(userInput).then((picture) => {
+      if (picture['photos'].length === 0) {
+        spinner.setAttribute('style', 'display:none');
+      } else {
+        renderImage(picture['photos'][0]['src']["large2x"])  
+      }
+    }).then(data => {
       spinner.setAttribute('style', 'display:none');
-    }
-    renderImage(picture['photos'][0]['src']["large2x"])  
-  }).then(data => {
-    spinner.setAttribute('style', 'display:none');
-  });
+    });
   }
 };
 
