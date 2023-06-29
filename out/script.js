@@ -38,7 +38,7 @@ let loading = document.createElement("div");
 loading.setAttribute('id', 'spinner');
 document.body.appendChild(loading);
 const spinner = document.getElementById("spinner");
-spinner.setAttribute('style', 'display:none');
+spinner.setAttribute('style', 'display');
 //fetch if input >3 
 let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () {
     spinner.setAttribute('style', 'display');
@@ -53,15 +53,12 @@ let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () 
         render(data);
         //image
         showImage(userInput).then((picture) => {
-            console.log(picture);
             if (picture['photos'].length === 0) {
                 spinner.setAttribute('style', 'display:none');
             }
             renderImage(picture['photos'][0]['src']["large2x"]);
         }).then(data => {
-            console.log("data: " + data);
             spinner.setAttribute('style', 'display:none');
-            console.log(data);
         });
     }
 });
@@ -106,6 +103,7 @@ function foo() {
             i++;
         }
         document.getElementById("citieslist").innerHTML = options;
+        spinner.setAttribute('style', 'display:none');
     });
 }
 foo();

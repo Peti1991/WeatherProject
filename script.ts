@@ -30,12 +30,14 @@ document.getElementById("root")!.appendChild(textField);
 let cityDatalist = document.createElement("datalist");
 cityDatalist.setAttribute('id', 'citieslist');
 document.getElementById("root")!.appendChild(cityDatalist);
+
+
 //spinner
 let loading = document.createElement("div")
 loading.setAttribute('id','spinner')
 document.body.appendChild(loading);
-const spinner = document.getElementById("spinner");
-spinner.setAttribute('style', 'display:none');
+const spinner = document.getElementById("spinner") as HTMLSelectElement;
+spinner.setAttribute('style', 'display') ;
 
 //fetch if input >3 
 let myEventListener = async (event: Event) => {
@@ -108,6 +110,7 @@ let renderImage = (content: any) => {
    }
    
    document.getElementById("citieslist")!.innerHTML = options;
+   spinner.setAttribute('style', 'display:none') ;
  }
 
  foo();
