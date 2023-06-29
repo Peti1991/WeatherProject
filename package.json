@@ -2,10 +2,10 @@
   "name": "teamwork3",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "script.js",
   "scripts": {
     "build": "tsc",
-    "start": "node out/index.js"
+    "start": "node out/script.js"
   },
   "keywords": [],
   "author": "",

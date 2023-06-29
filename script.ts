@@ -30,9 +30,16 @@ document.getElementById("root")!.appendChild(textField);
 let cityDatalist = document.createElement("datalist");
 cityDatalist.setAttribute('id', 'citieslist');
 document.getElementById("root")!.appendChild(cityDatalist);
+//spinner
+let loading = document.createElement("div")
+loading.setAttribute('id','spinner')
+document.body.appendChild(loading);
+const spinner = document.getElementById("spinner");
+spinner.setAttribute('style', 'display:none');
 
 //fetch if input >3 
 let myEventListener = async (event: Event) => {
+  spinner.setAttribute('style', 'display');
   let userInput = (event.target as HTMLInputElement).value;
   if (userInput.length>3) {
   let response = await fetch(
@@ -42,11 +49,18 @@ let myEventListener = async (event: Event) => {
       userInput +
       "&key=6885d9accf8948e6acc113000232406"*/
   )
+ 
   let data = await response.json();
   render(data);
+  
   //image
   showImage(userInput).then((picture) => {
-    renderImage(picture['photos'][0]['src']["large2x"])
+    if (picture['photos'].length === 0) {
+      spinner.setAttribute('style', 'display:none');
+    }
+    renderImage(picture['photos'][0]['src']["large2x"])  
+  }).then(data => {
+    spinner.setAttribute('style', 'display:none');
   });
   }
 };
@@ -81,10 +95,6 @@ let renderImage = (content: any) => {
 
 // cities list loading 
  let options = "";
-
-
-
-
  async function foo() {
    let obj;
    const res = await fetch("cities.json");
@@ -96,7 +106,7 @@ let renderImage = (content: any) => {
      options += '<option value="' + cityNames[i] + '" />';
      i++;
    }
-   console.log(cityNames)
+   
    document.getElementById("citieslist")!.innerHTML = options;
  }
 
@@ -123,6 +133,15 @@ async function showImage(city: string) {
 
   return response.json(); 
 }
+
+
+
+
+
+
+
+
+
 
 
 
