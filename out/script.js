@@ -81,16 +81,16 @@ let options = "";
 function foo() {
     return __awaiter(this, void 0, void 0, function* () {
         let obj;
-        const res = yield fetch("./citylist.json");
+        const res = yield fetch("cities.json");
         obj = yield res.json();
         let i = 0;
         let cityNames = [];
-        while (obj["cities"][i] !== undefined) {
-            cityNames = [...cityNames, obj["cities"][i]["name"]];
+        while (obj[i] !== undefined) {
+            cityNames = [...cityNames, obj[i]];
             options += '<option value="' + cityNames[i] + '" />';
             i++;
         }
-        /*console.log(cityNames);*/
+        console.log(cityNames);
         document.getElementById("citieslist").innerHTML = options;
     });
 }

@@ -82,21 +82,29 @@ let renderImage = (content: any) => {
 // cities list loading 
  let options = "";
 
+
+
+
  async function foo() {
    let obj;
-   const res = await fetch("./citylist.json");
+   const res = await fetch("cities.json");
    obj = await res.json();
    let i = 0;
    let cityNames: string[] = [];
-   while (obj["cities"][i] !== undefined) {
-     cityNames = [...cityNames, obj["cities"][i]["name"]];
+   while (obj[i] !== undefined) {
+     cityNames = [...cityNames, obj[i]];
      options += '<option value="' + cityNames[i] + '" />';
      i++;
    }
-   /*console.log(cityNames);*/
+   console.log(cityNames)
    document.getElementById("citieslist")!.innerHTML = options;
  }
+
  foo();
+
+
+
+
 
 /* cities end */
 
