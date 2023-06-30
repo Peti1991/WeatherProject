@@ -26,7 +26,7 @@ btn.setAttribute('id', 'button');
 document.getElementById("container").appendChild(btn);
 btn.innerHTML = "*";
 //create p into div for output
-let textField = document.createElement("p");
+let textField = document.createElement("div");
 textField.setAttribute('id', 'result-header');
 document.getElementById("root").appendChild(textField);
 //create selectable list  into div for input
@@ -42,51 +42,46 @@ spinner.setAttribute('style', 'display');
 //fetch if input >3 
 let myEventListener = (event) => __awaiter(void 0, void 0, void 0, function* () {
     let userInput = event.target.value;
-    if (userInput.length > 3) {
-        let response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=b8fd0881b87ef2f2311bfc0636d5cba4&units=metric"
-        /*"http://api.weatherapi.com/v1/current.json?q=" +
-        userInput +
-        "&key=6885d9accf8948e6acc113000232406"*/
-        );
-        let data = yield response.json();
-        render(data);
-        if (!data) {
+    let response = yield fetch("https://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&appid=b8fd0881b87ef2f2311bfc0636d5cba4&units=metric"
+    /*"http://api.weatherapi.com/v1/current.json?q=" +
+    userInput +
+    "&key=6885d9accf8948e6acc113000232406"*/
+    );
+    let data = yield response.json();
+    render(data);
+    if (!data) {
+        spinner.setAttribute('style', 'display:none');
+    }
+    else {
+        spinner.setAttribute('style', 'display');
+    }
+    //image
+    showImage(userInput).then((picture) => {
+        if (picture['photos'].length === 0) {
             spinner.setAttribute('style', 'display:none');
         }
         else {
-            spinner.setAttribute('style', 'display');
+            renderImage(picture['photos'][0]['src']["large2x"]);
         }
-        //image
-        showImage(userInput).then((picture) => {
-            if (picture['photos'].length === 0) {
-                spinner.setAttribute('style', 'display:none');
-            }
-            else {
-                renderImage(picture['photos'][0]['src']["large2x"]);
-            }
-        }).then(data => {
-            spinner.setAttribute('style', 'display:none');
-        });
-    }
+    }).then(data => {
+        spinner.setAttribute('style', 'display:none');
+    });
 });
 // input
 let resultHeaderElement = document.getElementById("result-header");
 let inputElement = document.getElementById("inputField");
-inputElement.addEventListener("input", myEventListener);
+inputElement.addEventListener("click", myEventListener);
 //output
 let render = (content) => {
     resultHeaderElement.innerHTML =
-        "<h1>" +
-            "Weather in " + content["name"] +
-            "<br>" +
-            content["main"]["temp"] + " &deg;C" +
-            "<br>" +
-            "humidity: " + content["main"]["humidity"] + " %" +
-            "<br>" +
-            content["weather"][0]["description"] +
-            "<br>" +
-            "wind: " + content["wind"]["speed"] + " km/h" +
-            "</h1>";
+        "<h2>" + "Weather in " + content["name"] + "</h2>" +
+            "<h1>" + content["main"]["temp"] + " &deg;C" + "</h1>" +
+            "<div id=" + "'container2'>" +
+            "<img " + "src=" + "https://openweathermap.org/img/wn/" + content["weather"][0]["icon"] + ".png" + " alt=''" + "/>" +
+            "<div>" + content["weather"][0]["description"] + "</div>" +
+            "</div>" +
+            "<div>" + "humidity: " + content["main"]["humidity"] + " %" + "</div>" +
+            "<div>" + "wind: " + content["wind"]["speed"] + " km/h" + "</div>";
 };
 resultHeaderElement.className = "aClassName";
 // image

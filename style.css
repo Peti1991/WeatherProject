@@ -1,35 +1,3 @@
-/* --- Reset --- */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    font: inherit;
-}
-
-html {
-    color-scheme: dark light;
-}
-
-body {
-    min-height: 100vh;
-}
-
-img, picture, svg, video {
-    display: block;
-    max-width: 100%;
-}
-/* --- Reset --- */
-
-/* --- Variables --- */
-:root {
-    --bg-img-layer: -10;
-    --nav-layer: 10;
-    
-}
-/* --- Variables --- */
 
 .aClassName {
     color:white
@@ -44,25 +12,58 @@ body{
     margin: 0;
     background: #222;
     background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 120%;
     
 }
 
-div {
+#root {
     padding: 2em;
-    background-color: black;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    opacity: 0.5;
+    background-color: #000000d0;
+    border-radius: 30px;
+    color: white;
+    margin: 1em;
+    width: 100%;
+    max-width: 420px;
 }
 
-#root input {
-    justify-content: center;
-    background-color: grey;
+.css-class-name {
+    padding: 0.4em 1em;
+    width: calc(100% - 100px);
+    border:none;
+    outline: none;
+    border-radius: 24px;
+    background-color: #7c7c7c2b;
     color: white;
-    border-radius: 1em;
-    font-size: 1.2em;
-    padding: 0.5em;
+    font-size: 105%;
+    font-family: inherit;
+}
+
+button{
+   margin: 0.5em;
+   border-radius: 50%;
+   border:none;
+   height: 44px;
+   width: 44px;
+   outline:none;
+   background-color: #7c7c7c2b;
+   color: white;
+   cursor: pointer;
+   transition: 0.2s ease-in-out;
+}
+
+button:hover{
+    background: #7c7c7c6b;
+}
+
+#result-header > div {
+    text-transform: capitalize;
+    margin-left: 8px;
+}
+
+h1 {
+    margin: 0;
+    margin-bottom: 0.4em;
 }
 
 ::placeholder {
@@ -70,13 +71,15 @@ div {
 }
  #container{
     display:flex;
-    flex-direction: row;
-
+    justify-content: center;
+    align-items: center;
  }
 
- button{
-    min-width: 2em;
+ #container2 {
+    display:flex;
+    align-items: center;
  }
+
 
  /* spinner*/
  #spinner:not([hidden]) {
